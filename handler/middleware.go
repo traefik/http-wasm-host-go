@@ -66,7 +66,7 @@ func (m *middleware) Features() handler.Features {
 func NewMiddleware(ctx context.Context, guest []byte, host handler.Host, opts ...Option) (Middleware, error) {
 	o := &options{
 		newRuntime:   DefaultRuntime,
-		moduleConfig: wazero.NewModuleConfig(),
+		moduleConfig: wazero.NewModuleConfig().WithStartFunctions("_start", "_initialize"),
 		logger:       api.NoopLogger{},
 	}
 	for _, opt := range opts {
